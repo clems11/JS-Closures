@@ -1,6 +1,7 @@
 var outer = function(){
   var name = 'Tyler';
   return function(){
+    console.log('The original name was ' + name);
     return 'The original name was ' + name;
   }
 };
@@ -12,12 +13,12 @@ var outer = function(){
 // Invoke outer saving the return value into another variable called 'inner'.
 
 // Code Here
-
+var inner = outer();
 
 //Once you do that, invoke inner.
 
   //Code Here
-
+inner();
 
 
 //////////////////PROBLEM 2////////////////////
@@ -26,6 +27,7 @@ var outer = function(){
 var callFriend = function(){
   var friend = 'Jake';
   function callF(number){
+    console.log('Calling ' + friend + ' at ' + number);
     return 'Calling ' + friend + ' at ' + number;
   }
   return callF;
@@ -36,9 +38,9 @@ var callFriend = function(){
 // Create a makeCall function that when invoked logs  'Calling Jake at 435-215-9248' in your console.
 
   //Code Here
+var makeCall = callFriend();
 
-
-
+makeCall("435-215-9248");
 
 
 
@@ -52,14 +54,28 @@ var callFriend = function(){
 */
 
 //Code Here
+function runCounter() { // to stop i from interacting with other counter problem
+
+function makeCounter() {
+  var num = 0;
+  return function () {
+    num++;
+    console.log(num);
+  }
+}
+
+
 
 //Uncomment this once you make your function
-//   var count = makeCounter();
-//   count(); // 1
-//   count(); // 2
-//   count(); // 3
-//   count(); // 4
+ var count = makeCounter();
+   count(); // 1
+   count(); // 2
+   count(); // 3
+   count(); // 4
 
+}
+
+runCounter();
 
 
 //////////////////PROBLEM 4////////////////////
@@ -91,20 +107,27 @@ counter = counterFactory(10);
 
 // Inside the motivation function create another function called message that will return 'You're doing awesome, keep it up firstname lastname.'
 
-  function motivation(firstname, lastname){
+function ohYoureTooKind() {// keeps problem number 5 from interacting with other firstname lastname problems
+
+
+  function motivation(firstname, lastname) {
 
     var welcomeText = 'You\'re doing awesome, keep it up ';
 
     // code message function here.
-
+    function message() {
+      console.log(welcomeText + firstname + " " + lastname);
+    }
 
     //Uncommment this to return the value of your invoked message function
 
-    //return message()
+    return message()
   }
 
   motivation('Billy', 'Bob'); // 'Your doing awesome keep it up Billy Bob
+}
 
+ohYoureTooKind();
 
 
 //////////////////PROBLEM 6////////////////////
@@ -127,6 +150,7 @@ counter = counterFactory(10);
 
     return {
       // Code here.
+
     };
 
   })();
@@ -143,8 +167,8 @@ counter = counterFactory(10);
 
 function timeOutCounter() {
   for (var i = 0; i <= 5; i++) {
+    var currentValue = newScope(i);
     setTimeout(function() {
-      console.log(i);
     }, i * 1000)
   }
 
@@ -152,6 +176,7 @@ function timeOutCounter() {
     console.log(i)
   }
 }
+
 timeOutCounter();
   // To make this code work you will need to create a new scope for every iteration.
 
@@ -161,17 +186,23 @@ timeOutCounter();
 
 //////////////////PROBLEM 8////////////////////
 
-var funcArray = [];
+var funcArray = [
+  function() {console.log(0);},
+  function() {console.log(1);},
+  function() {console.log(2);},
+  function() {console.log(3);},
+  function() {console.log(4);},
+  function() {console.log(5);}
+];
 
-/*
-  Make the following code work
+//  Make the following code work
 
-  funcArray[0]() //0
-  funcArray[1]() //1
-  funcArray[2]() //2
-  funcArray[3]() //3
-  funcArray[4]() //4
-  funcArray[5]() //5
+ funcArray[0]() //0
+ funcArray[1]() //1
+ funcArray[2]() //2
+ funcArray[3]() //3
+ funcArray[4]() //4
+ funcArray[5]() //5
 
-  *Hint: Don't let this fool you. Break down what's really happening here.
+  /* Hint: Don't let this fool you. Break down what's really happening here.
 */
